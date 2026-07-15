@@ -18,11 +18,14 @@ class FruitService {
         
         let (data, response) = try await URLSession.shared.data(from: url)
         
-        guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~=httpResponse.statusCode else {
+        guard let httpResponse = response as? HTTPURLResponse,
+                200..<300 ~= httpResponse.statusCode else {
             throw URLError(.badServerResponse)
         }
         
         let decoder = JSONDecoder()
+        
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
         return try decoder.decode([Fruit].self, from: data)
     }
 }
