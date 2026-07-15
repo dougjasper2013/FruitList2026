@@ -12,7 +12,27 @@ struct FruitDetailView: View {
     let fruit: Fruit
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 15) {
+            Text(fruit.name)
+                .font(.largeTitle)
+                .bold()
+            
+            Text("Family: \(fruit.family)")
+            Text("Order: \(fruit.order)")
+            
+            if let nutrition = fruit.nutritions {
+                Text("Calories: \(nutrition.calories)")
+                Text("Carbs: \(nutrition.carbohydrates)g, Protein: \(nutrition.protein)g, Fat: \(nutrition.fat)g, Sugar: \(nutrition.sugar)g")
+                    .font(.subheadline)
+                    .multilineTextAlignment(.center)
+                
+                
+            }
+            Spacer()
+        }
+        .padding()
+        .navigationTitle(fruit.name)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
